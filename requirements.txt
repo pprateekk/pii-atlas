@@ -1,0 +1,29 @@
+# Core
+python-dotenv
+pyyaml
+sqlalchemy
+psycopg2-binary
+
+# Synthetic data
+faker
+
+# Data quality
+great-expectations
+
+# Profiling
+duckdb
+
+# SQL parsing (validator, later phases)
+sqlparse
+
+# Scheduling
+apscheduler
+
+# LLM
+openai
+
+# UI
+streamlit
+
+# Tests
+pytest

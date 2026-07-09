@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+
+#secrets
+.env
+.env.example #for now
+
+#data should not be committed
+data/raw/
+
+.DS_Store
+.vscode/
+.idea/
+
+#great expectations files
+gx/uncommitted/

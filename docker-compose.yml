@@ -1,0 +1,23 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: pii-atlas-db
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-atlas}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-atlas_dev_password}
+      POSTGRES_DB: ${POSTGRES_DB:-pii_atlas}
+    ports:
+      - "5432:5432"
+    volumes:
+      # Any .sql files in database/schema run automatically the FIRST time
+      # the container starts with an empty data volume.
+      - ./database/schema:/docker-entrypoint-initdb.d
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-atlas}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  pgdata:
