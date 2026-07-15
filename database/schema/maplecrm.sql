@@ -11,7 +11,7 @@ CREATE TABLE maplecrm.customers (
     postal_code VARCHAR(7),
     date_of_birth DATE,
     segment VARCHAR(30), -- "smb", or "mid-market", or "enterprise"
-    created_at TIMESTAMP DEFAULT NOW(),
+    created_at TIMESTAMP DEFAULT NOW()
 );
 
 CREATE TABLE maplecrm.users (
