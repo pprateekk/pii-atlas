@@ -34,3 +34,41 @@ PROV_WEIGHTS = [0.38, 0.22, 0.14, 0.12, 0.04, 0.03, 0.03, 0.02, 0.015, 0.005]
 AREA_CODES = ["416", "647", "437", "905", "604", "778", "403", "587",
               "514", "438", "613", "343", "902", "306", "204", "709"]
 
+
+#find the check digit to make it a valid Luhn number
+def luhn_check_digit(number: str) -> int:
+    total_sum = 0
+    reverse_digits = number[::-1]
+    for i, digit in enumerate(reverse_digits):
+        n = int(digit)
+        if i % 2 == 0:
+            n = n * 2
+            if n > 9:
+                n = n - 9
+        total_sum = total_sum + n
+    check_digit = (10 - (total_sum % 10)) % 10
+    return check_digit
+
+#generate luhn valid SIN
+def gen_sin() -> str:
+    first8 = str(random.randint(1,7)) + "".join(random.choices("0123456789", k = 7))
+    check_digit = luhn_check_digit(first8)
+    sin = first8 + str(check_digit)
+    return f"{sin[0:3]}-{sin[3:6]}-{sin[6:9]}"
+
+#generate different formats of phone numbers
+#NANP-valid, fake (555-01XX) 
+def gen_phone() -> str:
+    area = random.choices(AREA_CODES)
+    last4 = f"01{random.randint(0,99):02d}"
+    style = random.random()
+    if style < 0.5:
+        return f"({area}) 555-{last4}"
+    elif style < 0.85:
+        return f"{area}-555-{last4}"
+    return f"+1 {area} 555 {last4}"
+
+
+
+
+        
