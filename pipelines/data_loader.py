@@ -68,7 +68,28 @@ def gen_phone() -> str:
         return f"{area}-555-{last4}"
     return f"+1 {area} 555 {last4}"
 
+#generate a random payment token
+def make_payment_token() -> str:
+    chars = "abcdefghijklmnopqrstuvwxyz0123456789"
+    return "tok_" + "".join(random.choices(chars, k=24))
 
+#generate a random datetime between two datetime
+def rand_dt(start:datetime, end:datetime) -> datetime:
+    delta = end - start
+    random_seconds = random.randint(0, int(delta.total_seconds()))
+    return start + timedelta(seconds=random_seconds)
+
+#generate a unique email address based on name and domain, avoiding duplicates in the used set
+def gen_email(name:str, domain:str, used:set) -> str:
+    base = name.lower().replace(" ", ".").replace("'", "")
+    base = "".join(c for c in base if c.isalnum() or c == ".")
+    email = f"{base}@{domain}"
+    i = 1
+    while email in used:
+        email = f"{base}{i}@{domain}"
+        i += 1
+    used.add(email)
+    return email
 
 
         
